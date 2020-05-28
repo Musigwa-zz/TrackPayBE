@@ -12,6 +12,6 @@ POST {{appUrl}}/repayments HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-  "customerId" : 7,
-  "amount": 45
+  "customerId" : 1,
+  "amount": 4500
 }
