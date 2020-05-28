@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
-    "prettier": "eslint --ignore-path ./.gitignore . --fix"
+    "prettier": "eslint --ignore-path ./.gitignore . --fix",
+    "migrate": "node_modules/.bin/sequelize db:migrate",
+    "migrate:undo": "node_modules/.bin/sequelize db:migrate:undo:all",
+    "seed": "node_modules/.bin/sequelize db:seed:all",
+    "db:reset": "yarn migrate:undo && yarn migrate && yarn seed"
   },
   "keywords": [
     "nodejs",
@@ -27,7 +31,8 @@
     "passport-jwt": "4.0.0",
     "pg": "^8.2.1",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.10"
+    "sequelize": "^5.21.10",
+    "sequelize-cli": "^5.5.1"
   },
   "husky": {
     "hooks": {
