@@ -18,6 +18,10 @@ module.exports = {
     ...common,
     database: DB_NAME_DEV,
   },
+  production: {
+    ...common,
+    use_env_variable: "DATABASE_URL",
+  },
   test: {
     ...common,
     database: "trackpaytest",

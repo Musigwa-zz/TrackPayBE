@@ -1,4 +1,5 @@
-@appUrl=http://localhost:{{$dotenv PORT}}/api
+# @appUrl=http://localhost:{{$dotenv PORT}}/api
+@appUrl=https://autopaytracker.herokuapp.com/api
 @contentType = application/json
 
 ### WELCOME
