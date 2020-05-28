@@ -161,6 +161,23 @@ class RepaymentController {
       action: "cascaded",
     });
   }
+
+  /**
+   * @description Retrieves a list of Repayments
+   * @static
+   * @param  {any} { body } The body object from extracted the request object
+   * @param  {any} res The http response object to be sent back to the requester
+   * @return {any} custom http response object or an error
+   * @memberof RepaymentController
+   */
+  static async getAll({ query: qParams }, res) {
+    const { seasonId, customerId } = qParams;
+    let where = {};
+    if (seasonId) where.seasonId = seasonId;
+    if (customerId) where.customerId = customerId;
+    const repayments = await Repayment.findAll({ where, ...query });
+    return res.status(statusCodes.OK).json({ repayments });
+  }
 }
 
 module.exports = RepaymentController;

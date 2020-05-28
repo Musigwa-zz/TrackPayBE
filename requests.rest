@@ -1,5 +1,5 @@
-# @appUrl=http://localhost:{{$dotenv PORT}}/api
-@appUrl=https://autopaytracker.herokuapp.com/api
+@appUrl=http://localhost:{{$dotenv PORT}}/api
+# @appUrl=https://autopaytracker.herokuapp.com/api
 @contentType = application/json
 
 ### WELCOME
@@ -15,3 +15,7 @@ Content-Type: {{contentType}}
   "customerId" : 1,
   "amount": 4500
 }
+
+### GET
+GET {{appUrl}}/repayments?customerId=1&seasonId=180 HTTP/1.1
+Content-Type: {{contentType}}

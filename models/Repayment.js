@@ -30,5 +30,19 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
+  Repayment.associate = function ({ Customer, Season }) {
+    Repayment.belongsTo(Customer, {
+      foreignKey: "customerId",
+      as: "customer",
+      onDelete: " CASCADE",
+      hooks: true,
+    });
+    Repayment.belongsTo(Season, {
+      foreignKey: "seasonId",
+      as: "season",
+      onDelete: " CASCADE",
+      hooks: true,
+    });
+  };
   return Repayment;
 };
