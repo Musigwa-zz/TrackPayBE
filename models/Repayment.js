@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         references: { model: "Customer", key: "id" },
       },
       seasonId: { type: DataTypes.INTEGER, allowNull: true },
-      amount: { type: DataTypes.DECIMAL, allowNull: false },
+      amount: { type: DataTypes.FLOAT, allowNull: false },
+      prevBalance: { type: DataTypes.FLOAT, allowNull: false },
+      totalRepaid: { type: DataTypes.FLOAT, allowNull: false },
+      totalCredit: { type: DataTypes.FLOAT, allowNull: false },
     },
     {
       tableName: "repayments",
@@ -27,13 +30,5 @@ module.exports = (sequelize, DataTypes) => {
       paranoid: true,
     }
   );
-  Repayment.associate = function ({ Customer }) {
-    Repayment.belongsTo(Customer, {
-      foreignKey: "id",
-      as: "clientId",
-      onDelete: "CASCADE",
-      hooks: true,
-    });
-  };
   return Repayment;
 };

@@ -660,7 +660,7 @@ module.exports = {
       {
         customerId: 7,
         seasonId: 180,
-        totalRepaid: 620,
+        totalRepaid: 6200,
         totalCredit: 6200,
         createdAt: new Date(),
         updatedAt: new Date(),
