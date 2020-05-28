@@ -15,7 +15,23 @@ module.exports = (sequelize, DataTypes) => {
       },
       startDate: { type: DataTypes.DATE, allowNull: false, unique: true },
     },
-    { tableName: "seasons", timestamps: true, paranoid: true }
+    {
+      tableName: "seasons",
+      timestamps: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt", "updatedAt"] },
+        where: { deletedAt: null },
+      },
+      paranoid: true,
+    }
   );
+  Season.associate = function ({ CustomerSummary }) {
+    Season.hasMany(CustomerSummary, {
+      foreignKey: "seasonId",
+      as: "season",
+      onDelete: " CASCADE",
+      hooks: true,
+    });
+  };
   return Season;
 };

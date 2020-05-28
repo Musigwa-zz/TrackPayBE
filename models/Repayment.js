@@ -17,7 +17,15 @@ module.exports = (sequelize, DataTypes) => {
       seasonId: { type: DataTypes.INTEGER, allowNull: true },
       amount: { type: DataTypes.DECIMAL, allowNull: false },
     },
-    { tableName: "repayments", timestamps: true, paranoid: true }
+    {
+      tableName: "repayments",
+      timestamps: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt", "updatedAt"] },
+        where: { deletedAt: null },
+      },
+      paranoid: true,
+    }
   );
   Repayment.associate = function ({ Customer }) {
     Repayment.belongsTo(Customer, {

@@ -13,6 +13,7 @@ module.exports = {
       amount: { type: Sequelize.DECIMAL, allowNull: false },
       createdAt: { allowNull: false, type: Sequelize.DATE },
       updatedAt: { allowNull: false, type: Sequelize.DATE },
+      deletedAt: { default: null, type: Sequelize.DATE },
     });
   },
   down: (queryInterface) => {

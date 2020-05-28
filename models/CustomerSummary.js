@@ -15,24 +15,32 @@ module.exports = (sequelize, DataTypes) => {
       },
       seasonId: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: { model: "Season", key: "id" },
       },
-      totalRepaid: { type: DataTypes.DECIMAL, allowNull: false },
-      totalCredit: { type: DataTypes.DECIMAL, allowNull: false },
+      totalRepaid: { type: DataTypes.FLOAT, allowNull: false },
+      totalCredit: { type: DataTypes.FLOAT, allowNull: false },
     },
-    { tableName: "customerSummaries", timestamps: true, paranoid: true }
+    {
+      tableName: "customerSummaries",
+      defaultScope: {
+        attributes: { exclude: ["deletedAt", "updatedAt"] },
+        where: { deletedAt: null },
+      },
+      timestamps: true,
+      paranoid: true,
+    }
   );
 
   CustomerSummary.associate = function ({ Customer, Season }) {
     CustomerSummary.belongsTo(Customer, {
-      foreignKey: "id",
-      as: "clientId",
+      foreignKey: "customerId",
+      as: "customer",
       onDelete: " CASCADE",
       hooks: true,
     });
-    CustomerSummary.hasOne(Season, {
-      foreignKey: "id",
+    CustomerSummary.belongsTo(Season, {
+      foreignKey: "seasonId",
       as: "season",
       onDelete: " CASCADE",
       hooks: true,

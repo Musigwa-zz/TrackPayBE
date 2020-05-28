@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: "customers",
       timestamps: true,
+      defaultScope: {
+        attributes: { exclude: ["deletedAt", "updatedAt"] },
+        where: { deletedAt: null },
+      },
       paranoid: true,
       hooks: {
         afterCreate(customer, _options) {
@@ -28,7 +32,14 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   );
-
+  Customer.associate = function ({ CustomerSummary }) {
+    Customer.hasMany(CustomerSummary, {
+      foreignKey: "customerId",
+      as: "customer",
+      onDelete: " CASCADE",
+      hooks: true,
+    });
+  };
   Customer.prototype.generateToken = function () {
     return sign({ id: this.id }, JWT_KEY);
   };

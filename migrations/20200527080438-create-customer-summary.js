@@ -9,11 +9,12 @@ module.exports = {
         primaryKey: true,
       },
       customerId: { type: Sequelize.INTEGER, allowNull: false },
-      seasonId: { type: Sequelize.INTEGER, allowNull: true },
-      totalRepaid: { type: Sequelize.DECIMAL, allowNull: false },
-      totalCredit: { type: Sequelize.DECIMAL, allowNull: false },
+      seasonId: { type: Sequelize.INTEGER, allowNull: false },
+      totalRepaid: { type: Sequelize.FLOAT, allowNull: false },
+      totalCredit: { type: Sequelize.FLOAT, allowNull: false },
       createdAt: { allowNull: false, type: Sequelize.DATE },
       updatedAt: { allowNull: false, type: Sequelize.DATE },
+      deletedAt: { default: null, type: Sequelize.DATE },
     });
   },
   down: (queryInterface) => {

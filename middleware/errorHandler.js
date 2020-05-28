@@ -4,6 +4,7 @@ module.exports = (cb) => async (req, res, next) => {
   try {
     await cb(req, res, next);
   } catch (err) {
+    console.log("this is the error:", err);
     let error = new Error(errorMessages.SERVER_ERROR);
     error.status = err.status || statusCodes.INTERNAL_SERVER_ERROR;
     if (err && err.details) {
